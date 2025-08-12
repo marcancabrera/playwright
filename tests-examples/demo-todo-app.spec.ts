@@ -81,7 +81,9 @@ test.describe("Mark all as completed", () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test("should allow me to mark all items as completed", async ({ page }) => {
+  test("@smoke - should allow me to mark all items as completed", async ({
+    page,
+  }) => {
     // Complete all todos.
     await page.getByLabel("Mark all as complete").check();
 
@@ -94,7 +96,7 @@ test.describe("Mark all as completed", () => {
     await checkNumberOfCompletedTodosInLocalStorage(page, 3);
   });
 
-  test("should allow me to clear the complete state of all items", async ({
+  test("@smoke - should allow me to clear the complete state of all items", async ({
     page,
   }) => {
     const toggleAll = page.getByLabel("Mark all as complete");
@@ -130,7 +132,9 @@ test.describe("Mark all as completed", () => {
 });
 
 test.describe("Item", () => {
-  test("should allow me to mark items as complete", async ({ page }) => {
+  test("@smoke - should allow me to mark items as complete", async ({
+    page,
+  }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder("What needs to be done?");
 
@@ -210,7 +214,7 @@ test.describe("Editing", () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test("should hide other controls when editing", async ({ page }) => {
+  test("@smoke - should hide other controls when editing", async ({ page }) => {
     const todoItem = page.getByTestId("todo-item").nth(1);
     await todoItem.dblclick();
     await expect(todoItem.getByRole("checkbox")).not.toBeVisible();
@@ -292,7 +296,9 @@ test.describe("Editing", () => {
 });
 
 test.describe("Counter", () => {
-  test("should display the current number of todo items", async ({ page }) => {
+  test("@smoke - should display the current number of todo items", async ({
+    page,
+  }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder("What needs to be done?");
 
@@ -344,7 +350,7 @@ test.describe("Clear completed button", () => {
 });
 
 test.describe("Persistence", () => {
-  test("should persist its data", async ({ page }) => {
+  test("@smoke - should persist its data", async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder("What needs to be done?");
 
@@ -416,7 +422,9 @@ test.describe("Routing", () => {
     await expect(todoItem).toHaveCount(3);
   });
 
-  test("should allow me to display completed items", async ({ page }) => {
+  test("@smoke - should allow me to display completed items", async ({
+    page,
+  }) => {
     await page.getByTestId("todo-item").nth(1).getByRole("checkbox").check();
     await checkNumberOfCompletedTodosInLocalStorage(page, 1);
     await page.getByRole("link", { name: "Completed" }).click();

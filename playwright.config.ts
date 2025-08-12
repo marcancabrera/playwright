@@ -13,13 +13,14 @@ import dotenv from "dotenv";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./e2e",
+  // testDir: "./e2e",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0,
+  retries: 2,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -55,7 +56,13 @@ export default defineConfig({
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
     },
-
+    {
+      name: "all-browsers-and-tests",
+      use: {
+        baseURL: "https://playwright.dev/",
+        ...devices["Desktop Chrome"],
+      },
+    },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -83,16 +90,16 @@ export default defineConfig({
     //     baseURL: baseEnvUrl.local.home,
     //   },
     // },
-    // {
-    //   name: "ci",
-    //   use: {
-    //     baseURL: process.env.CI
-    //       ? baseEnvUrl.ci.prefix +
-    //         process.env.GITHUB_REF_NAME +
-    //         baseEnvUrl.ci.suffix
-    //       : baseEnvUrl.staging.home,
-    //   },
-    // },
+    {
+      name: "ci",
+      use: {
+        baseURL: process.env.CI
+          ? baseEnvUrl.ci.prefix +
+            process.env.GITHUB_REF_NAME +
+            baseEnvUrl.ci.suffix
+          : baseEnvUrl.staging.home,
+      },
+    },
   ],
 
   /* Run your local dev server before starting the tests */
