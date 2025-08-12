@@ -1,5 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
-import baseEnvUrl from "./utils/environmentBaseUrl";
+import baseEnvUrl from "./utils/environmentBaseUrl.ts";
 
 /**
  * Read environment variables from file.
@@ -74,6 +74,24 @@ export default defineConfig({
     // {
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+
+    // Example only
+    // {
+    //   name: "local",
+    //   use: {
+    //     baseURL: baseEnvUrl.local.home,
+    //   },
+    // },
+    // {
+    //   name: "ci",
+    //   use: {
+    //     baseURL: process.env.CI
+    //       ? baseEnvUrl.ci.prefix +
+    //         process.env.GITHUB_REF_NAME +
+    //         baseEnvUrl.ci.suffix
+    //       : baseEnvUrl.staging.home,
+    //   },
     // },
   ],
 
